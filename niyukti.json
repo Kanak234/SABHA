@@ -1,0 +1,88 @@
+{
+  "_padho_pehle": [
+    "सभा के सदस्यों की नियुक्ति. यही एक file है जिसे तुम्हें बदलना पड़ेगा.",
+    "",
+    "प्रकार तीन हैं:",
+    "  ollama : तुम्हारी मशीन पर चलता local model.  'model' में उसका नाम दो.",
+    "  aujaar : कोई CLI agent.  'hukum' में उसे चलाने का तरीक़ा दो.",
+    "  nakli  : नक़ली, सिर्फ़ जाँच के लिए. कुछ चलाता नहीं.",
+    "",
+    "'chalu': false रखोगे तो वो सदस्य सभा में नहीं आएगा — हटाना नहीं पड़ेगा.",
+    "यह इसलिए रखा है कि तुम बिना कुछ मिटाए सदस्य बंद-चालू कर सको.",
+    "",
+    "बजट: adhiktam_akshar अंदाज़े के token हैं (चार अक्षर = लगभग एक token).",
+    "पहली बार चलाते वक़्त इसे कम रखो — 50000 के आसपास. देख लो कि सभा ठीक",
+    "चल रही है, फिर बढ़ाओ. ज़्यादा रखकर रात भर छोड़ देना महँगा पड़ सकता है."
+  ],
+
+  "sadasya": [
+    {
+      "naam": "ved-1",
+      "chalu": true,
+      "prakar": "ollama",
+      "model": "qwen3-coder",
+      "kaam_ka_vivaran": "code लिखना, तकनीकी काम",
+      "adhiktam_akshar": 200000,
+      "adhiktam_second": 1800,
+      "samay_seema": 300
+    },
+    {
+      "naam": "ved-2",
+      "chalu": true,
+      "prakar": "ollama",
+      "model": "deepseek-r1:7b",
+      "kaam_ka_vivaran": "सोचना, विश्लेषण, तर्क",
+      "adhiktam_akshar": 200000,
+      "adhiktam_second": 1800,
+      "samay_seema": 400
+    },
+    {
+      "naam": "ved-3",
+      "chalu": true,
+      "prakar": "ollama",
+      "model": "phi4-mini",
+      "kaam_ka_vivaran": "छोटे और तेज़ काम, सार बनाना",
+      "adhiktam_akshar": 150000,
+      "adhiktam_second": 1200,
+      "samay_seema": 200
+    },
+    {
+      "naam": "ved-4",
+      "chalu": false,
+      "prakar": "ollama",
+      "model": "qwen2.5-coder:3b",
+      "kaam_ka_vivaran": "हल्का code का काम",
+      "adhiktam_akshar": 100000,
+      "adhiktam_second": 900,
+      "samay_seema": 200
+    },
+    {
+      "naam": "aujaar-claude",
+      "chalu": false,
+      "prakar": "aujaar",
+      "hukum": ["claude", "-p"],
+      "kaam_ka_vivaran": "भारी काम — तभी चालू करो जब subscription चल रही हो",
+      "adhiktam_akshar": 100000,
+      "adhiktam_second": 1200,
+      "samay_seema": 600
+    },
+    {
+      "naam": "nakli-1",
+      "chalu": false,
+      "prakar": "nakli",
+      "kaam_ka_vivaran": "जाँच के लिए — कुछ चलाता नहीं",
+      "adhiktam_akshar": 50000,
+      "adhiktam_second": 300
+    }
+  ],
+
+  "sabha": {
+    "adhiktam_gehrai": 3,
+    "adhiktam_kaam": 200,
+    "adhiktam_chakkar": 100,
+    "apne_aap_manzoori": false,
+
+    "_tippani_gehrai": "3 का मतलब जाल तीन परत नीचे तक जा सकता है. मूल काम 8 हिस्सों में बँटा और हर हिस्सा फिर 4 में, तो 8 -> 32 -> 128 काम बनेंगे. यह अपने आप होता है, सिर्फ़ तब जब काम सचमुच इतना बड़ा हो.",
+    "_tippani_manzoori": "false ही रखो. true सिर्फ़ तब जब तुम ख़ुद बैठकर परदा देख रहे हो. रात भर चलने वाले काम में कभी नहीं."
+  }
+}
