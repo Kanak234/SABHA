@@ -104,12 +104,15 @@ def hukum_jaancho():
     return 0
 
 
-def hukum_chalao(kaam, tukde=None, chakkar=None):
-    """सभा बुलाओ."""
+def sabha_banao():
+    """niyukti.json पढ़कर एक तैयार Sabhapati देता है.
+
+    chalao और darpan दोनों यही बुलाते हैं, ताकि खिड़की और CLI कभी अलग
+    तरीक़े से सभा न बनाएँ.
+    """
     sadasya, d = niyukti_padho()
     if not sadasya:
-        print("कोई सदस्य चालू नहीं है.")
-        return 1
+        raise RuntimeError("कोई सदस्य चालू नहीं है.")
 
     cfg = d.get("sabha", {})
     sp = Sabhapati(
@@ -119,6 +122,27 @@ def hukum_chalao(kaam, tukde=None, chakkar=None):
         apne_aap_manzoori=cfg.get("apne_aap_manzoori", False),
     )
     budget_lagao(sp, d)
+    return sp
+
+
+def hukum_darpan():
+    """दर्पण — सभा की खिड़की."""
+    from darpan import kholo
+    try:
+        kholo(sabha_banao)
+    except RuntimeError as e:
+        print(e)
+        return 1
+    return 0
+
+
+def hukum_chalao(kaam, tukde=None, chakkar=None):
+    """सभा बुलाओ."""
+    try:
+        sp = sabha_banao()
+    except RuntimeError as e:
+        print(e)
+        return 1
 
     theek, gadbad = sp.sadasya_jaancho()
     if gadbad:
@@ -230,6 +254,7 @@ def mukhya():
 
     up.add_parser("hisaab", help="पिछली सभाओं का हिसाब")
     up.add_parser("nakli", help="नक़ली सभा चलाकर देखो")
+    up.add_parser("darpan", help="खिड़की खोलो (tkinter)")
 
     a = p.parse_args()
 
@@ -241,6 +266,8 @@ def mukhya():
         return hukum_hisaab()
     if a.hukum == "nakli":
         return hukum_nakli()
+    if a.hukum == "darpan":
+        return hukum_darpan()
 
     p.print_help()
     return 0
