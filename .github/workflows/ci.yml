@@ -24,3 +24,12 @@ jobs:
       - name: Run verification test suite
         run: |
           python3 tools/sab_jaancho.py
+
+      # दर्पण असली tkinter की खिड़की बनाता है. runner पर display नहीं होता,
+      # इसलिए xvfb के नीचे चलता है. display न मिले तो यह जाँच चुपचाप पास
+      # नहीं होती -- वो साफ़ कहती है कि चली ही नहीं.
+      - name: Run the GUI test suite
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq python3-tk xvfb
+          xvfb-run -a python3 tools/darpan_jaancho.py
