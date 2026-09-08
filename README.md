@@ -30,6 +30,35 @@ rather than being killed mid-write.
 It is tkinter, which ships with Python, so the stdlib-only promise holds. On
 Debian and Ubuntu tkinter is packaged separately: `sudo apt install python3-tk`.
 
+### As a desktop application
+
+```bash
+tools/sthapit_karo.sh
+```
+
+Puts सभा in the applications menu, so दर्पण opens like any other app. Writes
+only inside `~/.local` — no sudo, nothing touched outside your home directory.
+Remove it again with `tools/sthapit_karo.sh --hatao`.
+
+## When a member cannot finish
+
+This is already handled, and it is worth knowing how, because it is the
+difference between a council and a queue.
+
+A member has a budget — characters and seconds, set per member in
+`niyukti.json`. `raksha` watches it and answers in three degrees: **toko**
+warn but carry on, **baandho** finish what you are holding but take nothing
+new, **roko** stop.
+
+When a member is stopped, the chair puts it in `ruke_hue` and stops offering
+it work. Its unfinished task goes back to `taiyar`, and the next round hands
+it to somebody else. A task is retried twice; on the third failure it is
+marked `nakaam` for good, so a genuinely broken task cannot circle the room
+forever.
+
+So a member running out of budget, timing out, or dying mid-task does not
+stall the session — the work moves.
+
 ## The members
 
 Edit `niyukti.json`. Three kinds:
